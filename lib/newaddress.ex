@@ -38,7 +38,8 @@ defmodule NewChain.Address do
 
   end
 
-  def trimmedNewAddressEasy(address, chainId \\ 1012) when is_integer(chainId) do
+  def trimmedNewAddressEasy(address) do
+    chainId = Application.fetch_env!(:newaddress, :chain_id)
     newAddress =
       address
       |> to_string
@@ -46,7 +47,8 @@ defmodule NewChain.Address do
     "#{String.slice(newAddress, 0..7)}–#{String.slice(newAddress, -6..-1)}"
   end
 
-  def fullNewAddressEasy(address, chainId \\ 1012) when is_integer(chainId) do
+  def fullNewAddressEasy(address) do
+    chainId = Application.fetch_env!(:newaddress, :chain_id)
     address
     |> to_string
     |> hexAddress2NewAddress(chainId)
